@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
     	rightDriveAuto.rightEncoder.reset();
     }
 	
-	public void disabledPeriodic() {
+	public void disabledPeriodic(){
 		Scheduler.getInstance().run();
         leftDriveAuto.Dashboard();
         rightDriveAuto.Dashboard();
@@ -40,6 +40,9 @@ public class Robot extends IterativeRobot {
 
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        driverControls.getOI();
+        leftDriveAuto.Dashboard();
+        rightDriveAuto.Dashboard();
     }
 
     public void teleopInit() {
@@ -49,9 +52,9 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        driverControls.getOI();
-        leftDriveAuto.Dashboard();
-        rightDriveAuto.Dashboard();
+        leftDriveAuto.left.set(driverControls.driver.getRawAxis(1));
+        rightDriveAuto.right.set(driverControls.driver.getRawAxis(3));
+        
     }
     
     public void testPeriodic() {
